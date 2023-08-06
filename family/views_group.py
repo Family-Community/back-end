@@ -20,6 +20,7 @@ def create_group(request):
         return Response(status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['DELETE'])
 def delete_group(request, family_name):
     group = Group.objects.get(family_name = family_name)
