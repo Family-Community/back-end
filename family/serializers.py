@@ -1,18 +1,18 @@
 from rest_framework import serializers
 from .models import Group, Member
 
-class GroupSerializer(serializers.Serializer):
+class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ['family_name', 'color', 'entry_number']
+        fields = '__all__'
 
 
-class MemberSerializer(serializers.Serializer):
+class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['group', 'name', 'img']
 
-class MemberPostSerializer(serializers.Serializer):
+class MemberPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['name', 'img']
