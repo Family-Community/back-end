@@ -5,6 +5,7 @@ class Group(models.Model):
     family_name = models.CharField(max_length=10)
     color = models.CharField(max_length=7)
     entry_number = models.CharField(max_length=4)
+    family_code = models.TextField(default="")
 
 class Member(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
