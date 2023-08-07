@@ -4,7 +4,7 @@ from .models import CreateContent
 from django.views.decorators.http import require_POST
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import CreateContentSerializer  
+from rest_framework.serializers import CreateContentSerializer  
 
 
 @require_POST #post만 수행
