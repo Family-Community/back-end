@@ -3,7 +3,7 @@ from family.models import Member
 # Create your models here.
 
 
-class Content(models.Model): 
+class CreateContent(models.Model): 
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     title = models.CharField(max_length= 20, blank= True, null=False)
     content = models.CharField(max_length=80 , blank =True, null=True)
