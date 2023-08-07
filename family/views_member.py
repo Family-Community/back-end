@@ -23,9 +23,9 @@ def create_member(request, pk):
 
 # 멤버 수정
 @api_view(['PUT'])
-def update_member(reqeust, pk, member_id):
+def update_member(request, pk, member_id):
     member = Member.objects.get(group__pk = pk, member_id = member_id)
-    serializer = MemberSerializer(member, data = reqeust.data)
+    serializer = MemberSerializer(member, data = request.data)
     if serializer.is_valid():
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -37,5 +37,9 @@ def delete_member(request, pk, member_id):
     member.delete()
     return Response(status=status.HTTP_200_OK)
 
-
-
+# 현재 모든 멤버 확인
+@api_view(['GET'])
+def all_member(request):
+    members = Member.objects.all()
+    serializer = MemberSerializer(members, many = True)
+    return Response(serializer.data)
