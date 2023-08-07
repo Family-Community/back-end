@@ -10,7 +10,7 @@ class GroupSerializer(serializers.ModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['name', 'img', 'group', 'member_id']
+        fields = ['name', 'image', 'group', 'member_id']
 
     # def create(self, data):
     #     group = self.context.get('group')
@@ -20,4 +20,4 @@ class MemberSerializer(serializers.ModelSerializer):
 class MemberPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['name', 'img']
+        fields = ['name', 'image']

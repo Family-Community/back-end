@@ -31,11 +31,11 @@ def create_group(request):
         color = data_object['color']
         entry_number = data_object['entry_number']
         name = data_object['name']
-        img = data_object['img']
+        image = data_object['image']
         group = Group(family_name = family_name, color = color, entry_number = entry_number)
         group.save()
 
-        member = Member(group = group, name = name, img = img, member_id = 1)
+        member = Member(group = group, name = name, image = image, member_id = 1)
         member.save()
         return Response(status=status.HTTP_200_OK)
     except:

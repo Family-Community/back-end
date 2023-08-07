@@ -14,8 +14,8 @@ from rest_framework.decorators import api_view
 def create_member(request, pk):
     group = Group.objects.get(pk = pk)
     member_id = Member.objects.filter(group=group).count() + 1
-    img = request.FILES
-    serializer = MemberSerializer(data=request.data, img = img, context={'group': group, 'member_id': member_id})
+    image = request.FILES
+    serializer = MemberSerializer(data=request.data, image = image, context={'group': group, 'member_id': member_id})
     if serializer.is_valid():
         serializer.save()
         return Response(status=status.HTTP_201_CREATED)
