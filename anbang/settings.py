@@ -132,13 +132,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #서버의 파일 시스템에서 미디어 파일이 저장될 실제 경로,프로젝트 폴더 내의 media폴더에 저장
+MEDIA_URL = '/media/' #웹에서 미디어 파일에 접근하기 위한 url경로, 웹에서 보이는 url
 
 pymysql.install_as_MySQLdb()

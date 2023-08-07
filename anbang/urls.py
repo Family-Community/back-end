@@ -23,6 +23,7 @@ from family.views_group import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    path('contents/', include('contents.urls')),
+    ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
