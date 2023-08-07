@@ -8,6 +8,8 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
+    img = serializers.ImageField(use_url=True)
+
     class Meta:
         model = Member
         fields = ['name', 'img']

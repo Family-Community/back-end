@@ -11,10 +11,11 @@ from rest_framework.decorators import api_view
 # Create your views here.
 # 멤버 생성
 @api_view(['POST'])
-def create_member(request, family_name):
-    group = Group.objects.get(family_name=family_name)
+def create_member(request, pk):
+    group = Group.objects.get(pk = pk)
     member_id = Member.objects.filter(group=group).count() + 1
-    serializer = MemberSerializer(data=request.data, context={'group': group, 'member_id': member_id})
+    img = request.FILES
+    serializer = MemberSerializer(data=request.data, img = img, context={'group': group, 'member_id': member_id})
     if serializer.is_valid():
         serializer.save()
         return Response(status=status.HTTP_201_CREATED)
@@ -22,8 +23,8 @@ def create_member(request, family_name):
 
 # 멤버 수정
 @api_view(['PUT'])
-def update_member(reqeust, family_name, member_id):
-    member = Member.objects.get(group__family_name = family_name, member_id = member_id)
+def update_member(reqeust, pk, member_id):
+    member = Member.objects.get(group__pk = pk, member_id = member_id)
     serializer = MemberSerializer(member, data = reqeust.data)
     if serializer.is_valid():
         return Response(status=status.HTTP_200_OK)
@@ -31,8 +32,8 @@ def update_member(reqeust, family_name, member_id):
 
 # 멤버 삭제
 @api_view(['DELETE'])
-def delete_member(request, family_name, member_id):
-    member = Member.objects.get(group__family_name = family_name, member_id = member_id)
+def delete_member(request, pk, member_id):
+    member = Member.objects.get(group__pk = pk, member_id = member_id)
     member.delete()
     return Response(status=status.HTTP_200_OK)
 

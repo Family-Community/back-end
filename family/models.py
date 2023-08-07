@@ -9,5 +9,5 @@ class Group(models.Model):
 class Member(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     name = models.CharField(max_length=10)
-    img = models.ImageField(null=True, upload_to="", blank=True)
+    img = models.ImageField(null=True, upload_to="%Y/%m/%d")
     member_id = models.IntegerField(default = 0)
