@@ -61,4 +61,17 @@ def get_member(request, pk, member_id):
     return Response(res)
 
 
-# 가족 내 멤버 불러오기
+# 가족 내 멤버 불러오기 (완)
+@api_view(['GET'])
+def get_members(request, pk):
+    group = Group.objects.get(pk = pk)
+    members = Member.objects.filter(group__pk = pk)
+    members_serializer = MemberSerializer(members, many = True)
+    color_serializer = GroupColorSerializer(group)
+    family = members_serializer.data
+
+    data = {}
+    data['color'] = color_serializer.data['color']
+    data['family'] = family
+    return Response(data)
+
