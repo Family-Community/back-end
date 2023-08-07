@@ -3,6 +3,7 @@ argon2-cffi-bindings==21.2.0
 asgiref==3.7.2
 cffi==1.15.1
 Django==4.2.4
+django-cors-headers==4.2.0
 djangorestframework==3.14.0
 Pillow==10.0.0
 pycparser==2.21
