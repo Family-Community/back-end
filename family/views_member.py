@@ -66,7 +66,7 @@ def get_member(request, pk, member_id):
 def get_members(request, pk):
     group = Group.objects.get(pk = pk)
     members = Member.objects.filter(group__pk = pk)
-    members_serializer = MemberSerializer(members, many = True)
+    members_serializer = MemberPostSerializer(members, many = True)
     color_serializer = GroupColorSerializer(group)
     family = members_serializer.data
 
