@@ -11,6 +11,7 @@ urlpatterns = [
     path('<int:pk>/profile/create/', views_member_temporal.create_member),
     path('<int:pk>/profile/<int:member_id>/update/', views_member_temporal.update_member),
     path('<int:pk>/profile/<int:member_id>/delete/', views_member_temporal.delete_member),
+    path('<int:pk>/<int:member_id>/', views_member_temporal.get_member),
     path('allgroup/', views_group.all_group),
     path('allmember/', views_member.all_member),
 ]
