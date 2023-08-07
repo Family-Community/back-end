@@ -37,9 +37,10 @@ def create_group(request):
 
         member = Member(group = group, name = name, image = image, member_id = 1)
         member.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
 # 그룹 삭제
 @api_view(['DELETE'])
@@ -48,6 +49,7 @@ def delete_group(request, pk):
     group.delete()
     return Response(status=status.HTTP_200_OK)
 
+
 # entry_number 확인
 @api_view(['GET'])
 def entry_check(request, pk, entry_number):
@@ -55,6 +57,7 @@ def entry_check(request, pk, entry_number):
     if group.entry_number == entry_number:
         return Response(True)
     return Response(False)
+
 
 # 현재 모든 그룹 확인
 @api_view(['GET'])

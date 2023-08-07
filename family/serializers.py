@@ -7,6 +7,12 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class GroupColorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['color']
+
+
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
@@ -18,6 +24,12 @@ class MemberSerializer(serializers.ModelSerializer):
     #     return Member.objects.create(group = group, member_id = member_id, **data)
 
 class MemberPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['name', 'image']
+
+
+class MemberCheckSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['name', 'image']

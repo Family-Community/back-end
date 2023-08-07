@@ -7,21 +7,27 @@ from rest_framework import status
 from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
+import json
 
 # Create your views here.
-# 멤버 생성
+# 멤버 생성(완)
 @api_view(['POST'])
 def create_member(request, pk):
-    group = Group.objects.get(pk = pk)
-    member_id = Member.objects.filter(group=group).count() + 1
-    image = request.FILES
-    serializer = MemberSerializer(data=request.data, image = image, context={'group': group, 'member_id': member_id})
-    if serializer.is_valid():
-        serializer.save()
-        return Response(status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        data_object = json.load(request)
+        name = data_object['name']
+        image = data_object['image']
+        member_id = Member.objects.filter(group__pk = pk).count() + 1
+        group = Group.objects.get(pk = pk)
+        member = Member(name = name, image = image, member_id = member_id, group = group)
+        member.save()
 
-# 멤버 수정
+        return Response(status=status.HTTP_201_CREATED)
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+
+# 멤버 수정 (완)
 @api_view(['PUT'])
 def update_member(request, pk, member_id):
     member = Member.objects.get(group__pk = pk, member_id = member_id)
@@ -30,7 +36,7 @@ def update_member(request, pk, member_id):
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 
-# 멤버 삭제
+# 멤버 삭제 (완)
 @api_view(['DELETE'])
 def delete_member(request, pk, member_id):
     member = Member.objects.get(group__pk = pk, member_id = member_id)
@@ -43,3 +49,16 @@ def all_member(request):
     members = Member.objects.all()
     serializer = MemberSerializer(members, many = True)
     return Response(serializer.data)
+
+# 유저 정보 불러오기 (완)
+@api_view(['GET'])
+def get_member(request, pk, member_id):
+    user = Member.objects.get(group__pk = pk, member_id = member_id)
+    group = Group.objects.get(pk = pk)
+    member_serializer = MemberCheckSerializer(user)
+    color_serializer = GroupColorSerializer(group)
+    res = member_serializer.data|color_serializer.data
+    return Response(res)
+
+
+# 가족 내 멤버 불러오기
