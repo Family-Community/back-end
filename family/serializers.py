@@ -10,12 +10,12 @@ class GroupSerializer(serializers.ModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['name', 'img']
+        fields = ['name', 'img', 'group', 'member_id']
 
-    def create(self, data):
-        group = self.context.get('group')
-        member_id = self.context.get('member_id')
-        return Member.objects.create(group = group, member_id = member_id, **data)
+    # def create(self, data):
+    #     group = self.context.get('group')
+    #     member_id = self.context.get('member_id')
+    #     return Member.objects.create(group = group, member_id = member_id, **data)
 
 class MemberPostSerializer(serializers.ModelSerializer):
     class Meta:

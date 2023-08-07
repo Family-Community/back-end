@@ -33,9 +33,9 @@ def create_group(request):
         name = data_object['name']
         img = data_object['img']
         group = Group(family_name = family_name, color = color, entry_number = entry_number)
-        member = Member(group = group, name = name, img = img, member_id = 1)
-
         group.save()
+
+        member = Member(group = group, name = name, img = img, member_id = 1)
         member.save()
         return Response(status=status.HTTP_200_OK)
     except:
