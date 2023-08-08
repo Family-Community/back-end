@@ -1,5 +1,5 @@
 from django.db import models
-from ..family.models import *
+from family.models import *
 
 # Create your models here.
 

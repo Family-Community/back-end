@@ -16,7 +16,7 @@ class GroupColorSerializer(serializers.ModelSerializer):
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['name', 'image', 'group', 'member_id']
+        fields = ['name', 'image', 'group']
 
     # def create(self, data):
     #     group = self.context.get('group')
