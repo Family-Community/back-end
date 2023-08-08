@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import CreateContent
 
-class CreateContentSerializer(serializers.ModelSerializer):
+class ContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = CreateContent
-        fields = '__all__' 
+        fields = ['title', 'content', 'photo','date'] 
