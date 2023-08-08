@@ -1,9 +1,9 @@
 from django.db import models
-from family.models import Member
+from family.models import Member,Group
 
 #사진 저장 경로 설정
 def user_photo_path(instance, filename):
-    return f'user_photos/{instance.group_id}/{instance.member_id}/{filename}'
+    return f'user_photos/{instance.Group.pk}/{instance.Member.pk}/{filename}'
 
 #게시글생성
 class CreateContent(models.Model): 
@@ -15,4 +15,8 @@ class CreateContent(models.Model):
 
     def __str__(self):
         return self.title
+    
+#게시글수정
+
+# class UpdateContent(models.Model)
 
