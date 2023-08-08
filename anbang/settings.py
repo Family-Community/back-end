@@ -94,7 +94,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'family',
         'HOST': 'svc.sel4.cloudtype.app',
-        'PORT': '32103'
+        'PORT': '32160'
     }
 }
 
