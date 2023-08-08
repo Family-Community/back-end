@@ -58,9 +58,9 @@ def all_member(request):
 
 # 유저 정보 불러오기 (완)
 @api_view(['GET'])
-def get_member(request, pk, member_id):
-    user = Member.objects.get(group__pk = pk, member_id = member_id)
-    group = Group.objects.get(pk = pk)
+def get_member(request, group_pk, member_pk):
+    user = Member.objects.get(pk = member_pk)
+    group = Group.objects.get(pk = group_pk)
     member_serializer = MemberCheckSerializer(user)
     color_serializer = GroupColorSerializer(group)
     res = member_serializer.data|color_serializer.data
@@ -69,9 +69,9 @@ def get_member(request, pk, member_id):
 
 # 가족 내 멤버 불러오기 (완)
 @api_view(['GET'])
-def get_members(request, pk):
-    group = Group.objects.get(pk = pk)
-    members = Member.objects.filter(group__pk = pk)
+def get_members(request, group_pk):
+    group = Group.objects.get(pk = group_pk)
+    members = Member.objects.filter(group__pk = group_pk)
     members_serializer = MemberPostSerializer(members, many = True)
     color_serializer = GroupColorSerializer(group)
     family = members_serializer.data
