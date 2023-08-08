@@ -30,11 +30,17 @@ def create_member(request, pk):
 # 멤버 수정 (완)
 @api_view(['PUT'])
 def update_member(request, pk, member_id):
-    member = Member.objects.get(group__pk = pk, member_id = member_id)
-    serializer = MemberSerializer(member, data = request.data)
-    if serializer.is_valid():
+    request_object = json.load(request)
+    
+    try:
+        member = Member.objects.get(group__pk = pk, member_id = member_id)
+        member.name = request_object['name']
+        member.image = request_object['image']
+        member.save()
         return Response(status=status.HTTP_200_OK)
-    return Response(status=status.HTTP_400_BAD_REQUEST)
+    except:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
 
 # 멤버 삭제 (완)
 @api_view(['DELETE'])
