@@ -19,3 +19,9 @@ class CreateMember(CreateAPIView):
         group_pk = self.kwargs['group_pk']
         group = Group.objects.get(pk = group_pk)
         serializer.save(group = group)
+
+
+class MemberDetail(RetrieveUpdateDestroyAPIView):
+    kwargs = ['group_pk']
+    queryset = Member.objects.get()
+    serializer_class = MemberPostSerializer
