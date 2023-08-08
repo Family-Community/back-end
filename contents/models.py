@@ -17,6 +17,13 @@ class CreateContent(models.Model):
         return self.title
     
 #게시글수정
+class UpdateContent(models.Model): 
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    title = models.CharField(max_length=20, blank=True, null=False)
+    content = models.CharField(max_length=80, blank=True, null=True)
+    photo = models.ImageField(upload_to=user_photo_path, max_length=150, null=False)
+    date = models.DateTimeField(auto_now=True)  # 자동으로 수정된 날짜로 갱신됨
 
-# class UpdateContent(models.Model)
+    def __str__(self):
+        return self.title
 

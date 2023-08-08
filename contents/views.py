@@ -1,8 +1,8 @@
-from rest_framework.generics import CreateAPIView,DestroyAPIView
+from rest_framework.generics import CreateAPIView,DestroyAPIView,UpdateAPIView
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ContentSerializer
-from .models import CreateContent
+from .serializers import ContentSerializer,UpdateContentSerializer
+from .models import CreateContent, UpdateContent
 
 #게시글생성
 class CreateContentAPIView(CreateAPIView):
@@ -25,3 +25,14 @@ class DeleteContentAPIView(DestroyAPIView):
         return Response(status=status.HTTP_200_OK)
 
 
+#게시글수정
+class UpdateContentAPIView(UpdateAPIView):
+    queryset = UpdateContent.objects.all()
+    serializer_class = UpdateContentSerializer
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data, status=status.HTTP_200_OK)
