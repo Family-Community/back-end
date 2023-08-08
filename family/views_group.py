@@ -8,6 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 import json
+from rest_framework.generics import CreateAPIView, DestroyAPIView, RetrieveDestroyAPIView
 
 # from argon2 import PasswordHasher
 
@@ -34,11 +35,24 @@ import json
 
 
 # 그룹 삭제
-@api_view(['DELETE'])
-def delete_group(request, pk):
-    group = Group.objects.get(pk = pk)
-    group.delete()
-    return Response(status=status.HTTP_200_OK)
+# @api_view(['DELETE'])
+# def delete_group(request, pk):
+#     group = Group.objects.get(pk = pk)
+#     group.delete()
+#     return Response(status=status.HTTP_200_OK)
+
+# 그룹 생성
+class CreateGroup(CreateAPIView):
+    serializer_class = GroupSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+
+# 그룹 삭제
+class DeleteGroup(DestroyAPIView):
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
 
 
 # entry_number 확인

@@ -90,11 +90,11 @@ WSGI_APPLICATION = 'anbang.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'Group',
+        'NAME': 'Family',
         'USER': 'root',
         'PASSWORD': 'family',
         'HOST': 'svc.sel4.cloudtype.app',
-        'PORT': '31284'
+        'PORT': '32103'
     }
 }
 

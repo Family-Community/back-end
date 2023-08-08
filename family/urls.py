@@ -1,12 +1,12 @@
 from django.urls import path
-from . import views_member, views_group, views_group_generic, views_member_generic
+from . import views_member, views_group, views_member_generic
 
 app_name = 'family'
 
 urlpatterns = [
     # path('createfamily/', views_group.create_group),
-    path('createfamily/', views_group_generic.CreateGroup.as_view()),
-    path('<int:pk>/delete/', views_group_generic.DeleteGroup.as_view()),
+    path('createfamily/', views_group.CreateGroup.as_view()),
+    path('<int:pk>/delete/', views_group.DeleteGroup.as_view()),
     path('<int:pk>/enter/<str:entry_number>/', views_group.entry_check),
     path('<int:pk>/profile/', views_member.get_members),
     path('<int:group_pk>/profile/create/', views_member_generic.CreateMember.as_view()),
