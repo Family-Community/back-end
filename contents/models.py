@@ -3,9 +3,7 @@ from family.models import Member,Group
 
 #사진 저장 경로 설정
 def user_photo_path(instance, filename):
-    group = Group.objects.get()
-    members = Member.objects.get()
-    return f'user_photos/{instance.group.pk}/{instance.members.pk}/{filename}'
+    return f'user_photos/{instance.member.group.pk}/{instance.member.pk}/{filename}'
 
 #게시글생성
 class CreateContent(models.Model): 
