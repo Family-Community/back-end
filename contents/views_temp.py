@@ -11,8 +11,24 @@ import json
 
 # Create your views here.
 
-
+# 게시글 작성
 @api_view(['POST'])
 def create_post(request):
     return Response(status=status.HTTP_201_CREATED)
 
+
+# 게시글 수정
+@api_view(['PUT'])
+def update_post(request):
+    return Response(status=status.HTTP_200_OK)
+
+
+# 게시글 삭제
+@api_view(['DELETE'])
+def delete_post(request):
+    return Response(status=status.HTTP_200_OK)
+
+# 리액션 작성
+@api_view(['PUT'])
+def reaction(request):
+    return Response(status=status.HTTP_200_OK)
