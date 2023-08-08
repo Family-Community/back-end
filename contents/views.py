@@ -1,35 +1,3 @@
-
-from django.shortcuts import render, redirect
-from rest_framework.response import Response
-from rest_framework import status
-from .serializers import ContentSerializer 
-from django.http import JsonResponse
-from rest_framework.decorators import api_view
-from .models import CreateContent
-import json
-
-
-@api_view(['POST']) #게시글 생성
-def create_content(request):
-    try:
-        data_object = json.load(request)
-        title = data_object['title']
-        content = data_object['content']
-        photo = data_object['photo']
-        contents = CreateContent(title=title, content=content,photo=photo)
-        contents.save()
-        return Response(status=status.HTTP_201_CREATED)
-    except:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['DELETE']) #게시글 삭제
-def delete_content(request, pk):
-    content = CreateContent.objects.get(pk=pk)
-    content.delete()
-    return Response(status=status.HTTP_200_OK)
-
-
 from rest_framework.generics import CreateAPIView,DestroyAPIView
 from rest_framework.response import Response
 from rest_framework import status
