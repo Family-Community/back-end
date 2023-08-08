@@ -2,10 +2,8 @@ from django.db import models
 from family.models import Member,Group
 
 #사진 저장 경로 설정
-def user_photo_path(instance,pk, filename):
-    group = Group.objects.get(pk)
-    member= Member.objects.get(pk)
-    return f'user_photos/{instance.group.pk}/{instance.member.pk}/{filename}'
+def user_photo_path(instance, filename):
+    return f'user_photos/{instance.member.pk}/{filename}'
 
 #게시글생성
 class CreateContent(models.Model): 
