@@ -11,7 +11,7 @@ class ContentUserSerializer(serializers.ModelSerializer):
     member = MemberPostSerializer()
     class Meta:
         model = Content
-        fields = ['member', 'title', 'content', 'photo']
+        fields = ['member', 'title', 'content', 'photo', 'date']
 
 
 class CreateContentSerializer(serializers.ModelSerializer):
