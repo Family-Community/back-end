@@ -74,4 +74,5 @@ def all_group(request):
 @api_view(['GET'])
 def return_id(request, family_code):
     group = Group.objects.get(family_code = family_code)
-    return Response(group.pk)
+    serializer = GroupPkSerializer(group)
+    return Response(serializer.data)
