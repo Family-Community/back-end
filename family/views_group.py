@@ -44,7 +44,7 @@ from rest_framework.generics import CreateAPIView, DestroyAPIView, RetrieveDestr
 # 그룹 생성
 class CreateGroup(CreateAPIView):
     serializer_class = GroupSerializer
-
+    
     def perform_create(self, serializer):
         serializer.save()
 
