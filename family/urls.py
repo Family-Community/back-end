@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views_member, views_group, views_member_generic
 
+
 app_name = 'family'
 
 urlpatterns = [
+
     # path('createfamily/', views_group.create_group),
     path('createfamily/', views_group.CreateGroup.as_view()), # 그룹 생성
     path('<int:pk>/delete/', views_group.DeleteGroup.as_view()), # 그룹 삭제
@@ -14,4 +16,5 @@ urlpatterns = [
     path('profile/<int:pk>/', views_member_generic.MemberDetail.as_view()), # 프로필 수정, 삭제
     path('allgroup/', views_group.all_group), # 모든 그룹 목록
     path('allmember/', views_member.all_member), # 모든 멤버 목록
+
 ]

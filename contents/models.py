@@ -1,20 +1,29 @@
 from django.db import models
-from family.models import *
+from family.models import Member,Group
 
-# Create your models here.
+#사진 저장 경로 설정
+def user_photo_path(instance, filename):
+    return f'user_photos/{instance.member.pk}/{filename}'
 
-# 피드 작성하기
-class Content(models.Model): 
+#게시글생성
+class CreateContent(models.Model): 
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     title = models.CharField(max_length= 20, blank= True, null=False)
     content = models.CharField(max_length=80 , blank =True, null=True)
-    photo = models.TextField(default="")
+    photo = models.ImageField(upload_to=user_photo_path,max_length=150,null=False)
     date= models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.title
     
+#게시글수정
+class UpdateContent(models.Model): 
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    title = models.CharField(max_length=20, blank=True, null=False)
+    content = models.CharField(max_length=80, blank=True, null=True)
+    photo = models.ImageField(upload_to=user_photo_path, max_length=150, null=False)
+    date = models.DateTimeField(auto_now=True)  # 자동으로 수정된 날짜로 갱신됨
 
-# 리액션
-class Reaction(models.Model):
-    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title
+
