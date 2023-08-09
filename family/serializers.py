@@ -13,6 +13,12 @@ class GroupColorSerializer(serializers.ModelSerializer):
         fields = ['color']
 
 
+class GroupPkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ['id']
+
+
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
