@@ -1,13 +1,20 @@
 from rest_framework import serializers
-from .models import CreateContent,UpdateContent
+from .models import Content
+from family.serializers import *
 
 class ContentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CreateContent
-        fields = ['title', 'content', 'photo','date'] 
+        model = Content
+        fields = '__all__'
 
-
-class UpdateContentSerializer(serializers.ModelSerializer):
+class ContentUserSerializer(serializers.ModelSerializer):
+    member = MemberPostSerializer()
     class Meta:
-        model = UpdateContent
-        fields = ['title', 'content', 'photo', 'date']
+        model = Content
+        fields = ['member', 'title', 'content', 'photo']
+
+
+class CreateContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Content
+        fields = ['title', 'content', 'photo']

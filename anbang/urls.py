@@ -24,4 +24,5 @@ from family.views_group import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('group/', include('family.urls')),
+    path('contents/', include('contents.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import CreateContent,UpdateContent
+from .models import Content
 
-admin.site.register(CreateContent)
-admin.site.register(UpdateContent)
+admin.site.register(Content)

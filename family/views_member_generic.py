@@ -22,6 +22,7 @@ class CreateMember(CreateAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-class MemberDetail(RetrieveUpdateDestroyAPIView):
+class UpdateDestroyMember(RetrieveUpdateDestroyAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberPostSerializer
+    lookup_url_kwarg = 'member_pk'
