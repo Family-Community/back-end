@@ -1,4 +1,4 @@
-from rest_framework.generics import CreateAPIView,RetrieveUpdateDestroyAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView,DestroyAPIView, ListAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import *
@@ -24,10 +24,16 @@ class CreateContent(CreateAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-# 게시글 수정, 삭제
-class UpdateDestroyContent(RetrieveUpdateDestroyAPIView):
+# 게시글 수정
+class UpdateContent(UpdateAPIView):
     queryset = Content.objects.all()
     serializer_class = CreateContentSerializer
+    lookup_url_kwarg = 'post_id'
+
+
+# 게시글 삭제
+class DeleteContent(DestroyAPIView):
+    queryset = Content.objects.all()
     lookup_url_kwarg = 'post_id'
 
 
@@ -75,44 +81,68 @@ def react(request, group_pk, member_pk, post_id, reaction_number):
     if reaction_number == 1:
         if content.user_smile.filter(pk = member_pk).exists():
             content.user_smile.remove(member)
+            content.smile_cnt -= 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
         else:
             content.user_smile.add(member)
+            content.smile_cnt += 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
     elif reaction_number == 2:
         if content.user_good.filter(pk = member_pk).exists():
             content.user_good.remove(member)
+            content.good_cnt -= 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
         else:
             content.user_good.add(member)
+            content.good_cnt += 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
     elif reaction_number == 3:
         if content.user_sad.filter(pk = member_pk).exists():
             content.user_sad.remove(member)
+            content.sad_cnt -= 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
         else:
             content.user_sad.add(member)
+            content.sad_cnt += 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
     elif reaction_number == 4:
         if content.user_heart.filter(pk = member_pk).exists():
             content.user_heart.remove(member)
+            content.heart_cnt -= 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
         else:
             content.user_heart.add(member)
+            content.heart_cnt += 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
     elif reaction_number == 5:
         if content.user_worry.filter(pk = member_pk).exists():
             content.user_worry.remove(member)
+            content.worry_cnt -= 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
         else:
             content.user_worry.add(member)
+            content.worry_cnt += 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
     elif reaction_number == 6:
         if content.user_check.filter(pk = member_pk).exists():
             content.user_check.remove(member)
+            content.check_cnt -= 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
         else:
             content.user_check.add(member)
+            content.check_cnt += 1
+            content.save()
             return Response(status=status.HTTP_200_OK)
 
 

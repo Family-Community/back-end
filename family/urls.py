@@ -14,7 +14,7 @@ urlpatterns = [
     path('<int:group_pk>/profile/', views_member.get_members), # 그룹 멤버 모두 반환 + color
     path('<int:group_pk>/profile/create/', views_member_generic.CreateMember.as_view()), # 그룹 내 프로필 생성
     path('profile/<int:pk>/delete/', views_member_generic.DeleteMember.as_view()), # 프로필 삭제
-    path('profile/<int:pk>/update/', views_member_generic.RetrieveMember.as_view()), # 프로필 수정
+    path('profile/<int:pk>/update/', views_member_generic.UpdateMember.as_view()), # 프로필 수정
     path('allgroup/', views_group.all_group), # 모든 그룹 목록
     path('allmember/', views_member.all_member), # 모든 멤버 목록
     path('familycode/<str:family_code>/', views_group.return_id), # family_code -> pk 반환

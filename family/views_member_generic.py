@@ -27,6 +27,6 @@ class DeleteMember(DestroyAPIView):
     serializer_class = MemberWithIDSerializer
 
 # 멤버 수정
-class RetrieveMember(UpdateAPIView):
+class UpdateMember(UpdateAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberCreateSerializer

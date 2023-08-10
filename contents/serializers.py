@@ -26,7 +26,8 @@ class ContentSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Content
-        fields = ['id', 'title', 'content', 'photo', 'date', 'user_smile', 'user_good', 'user_sad', 'user_heart', 'user_worry', 'user_check'] # 'reaction'
+        fields = '__all__'
+        # fields = ['id', 'title', 'content', 'photo', 'date', 'user_smile', 'user_good', 'user_sad', 'user_heart', 'user_worry', 'user_check'] # 'reaction'
 
     def get_photo(self, obj):
         if obj.photo:
@@ -42,7 +43,9 @@ class ContentUserSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Content
-        fields = ['member', 'title', 'content', 'photo', 'date', 'user_smile', 'user_good', 'user_sad', 'user_heart', 'user_worry', 'user_check'] # 'reaction'
+        fields = '__all__'
+        # fields = ['member', 'title', 'content', 'photo', 'date', 'user_smile', 'user_good', 'user_sad', 'user_heart', 'user_worry', 'user_check'] # 'reaction'
+
 
     def get_photo(self, obj):
         if obj.photo:

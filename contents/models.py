@@ -18,6 +18,12 @@ class Content(models.Model):
     user_heart = models.ManyToManyField(Member, related_name='heart_content')
     user_worry = models.ManyToManyField(Member, related_name='worry_content')
     user_check = models.ManyToManyField(Member, related_name='check_content')
+    smile_cnt = models.IntegerField(default= 0)
+    good_cnt = models.IntegerField(default= 0)
+    sad_cnt = models.IntegerField(default= 0)
+    heart_cnt = models.IntegerField(default= 0)
+    worry_cnt = models.IntegerField(default= 0)
+    check_cnt = models.IntegerField(default= 0)
 
     def __str__(self):
         return self.title
