@@ -64,7 +64,7 @@ def search_contents(request, group_pk, search):
     color_serializer = GroupColorSerializer(group)
     
     contents = Content.objects.filter(Q(member__group__pk = group_pk)&(Q(title__contains = search)|Q(content__contains = search)|Q(member__name = search)))
-    contents_serializer = ContentUserSerializer(contents, many = True)
+    contents_serializer = ContentUserSerializer(contents, many = True, context = {'request':request})
 
     data = {}
     data['color'] = color_serializer.data['color']
