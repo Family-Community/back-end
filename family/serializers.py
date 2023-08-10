@@ -33,10 +33,4 @@ class MemberSerializer(serializers.ModelSerializer):
 class MemberPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['name', 'image']
-
-
-class MemberCheckSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Member
-        fields = ['name', 'image']
+        fields = ['id', 'name', 'image']

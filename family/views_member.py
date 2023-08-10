@@ -58,11 +58,10 @@ def all_member(request):
 
 # 유저 정보 불러오기 (완)
 @api_view(['GET'])
-
 def get_member(request, group_pk, member_pk):
     user = Member.objects.get(pk = member_pk)
     group = Group.objects.get(pk = group_pk)
-    member_serializer = MemberCheckSerializer(user)
+    member_serializer = MemberPostSerializer(user)
     color_serializer = GroupColorSerializer(group)
     res = member_serializer.data|color_serializer.data
     return Response(res)
