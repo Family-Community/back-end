@@ -12,20 +12,20 @@ import json
 
 # Create your views here.
 # 멤버 생성(완)
-@api_view(['POST'])
-def create_member(request, pk):
-    try:
-        data_object = json.load(request)
-        name = data_object['name']
-        image = data_object['image']
-        member_id = Member.objects.filter(group__pk = pk).count() + 1
-        group = Group.objects.get(pk = pk)
-        member = Member(name = name, image = image, member_id = member_id, group = group)
-        member.save()
+# @api_view(['POST'])
+# def create_member(request, pk):
+#     try:
+#         data_object = json.load(request)
+#         name = data_object['name']
+#         image = data_object['image']
+#         member_id = Member.objects.filter(group__pk = pk).count() + 1
+#         group = Group.objects.get(pk = pk)
+#         member = Member(name = name, image = image, member_id = member_id, group = group)
+#         member.save()
 
-        return Response(status=status.HTTP_201_CREATED)
-    except:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+#         return Response(status=status.HTTP_201_CREATED)
+#     except:
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
         
 
 # 멤버 수정 (완)
@@ -45,11 +45,11 @@ def create_member(request, pk):
     
 
 # 멤버 삭제 (완)
-@api_view(['DELETE'])
-def delete_member(request, pk, member_id):
-    member = Member.objects.get(group__pk = pk, member_id = member_id)
-    member.delete()
-    return Response(status=status.HTTP_200_OK)
+# @api_view(['DELETE'])
+# def delete_member(request, pk, member_id):
+#     member = Member.objects.get(group__pk = pk, member_id = member_id)
+#     member.delete()
+#     return Response(status=status.HTTP_200_OK)
 
 # 현재 모든 멤버 확인
 @api_view(['GET'])
