@@ -13,7 +13,7 @@ from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
 # Create your views here.
 # 멤버 생성
 class CreateMember(CreateAPIView):
-    serializer_class = MemberPostSerializer
+    serializer_class = MemberWithoutIDSerializer
 
     def perform_create(self, serializer):
         group_pk = self.kwargs['group_pk']
@@ -24,5 +24,4 @@ class CreateMember(CreateAPIView):
 
 class UpdateDestroyMember(RetrieveUpdateDestroyAPIView):
     queryset = Member.objects.all()
-    serializer_class = MemberPostSerializer
-    lookup_url_kwarg = 'member_pk'
+    serializer_class = MemberWithIDSerializer

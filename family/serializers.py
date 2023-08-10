@@ -30,13 +30,12 @@ class MemberSerializer(serializers.ModelSerializer):
     #     member_id = self.context.get('member_id')
     #     return Member.objects.create(group = group, member_id = member_id, **data)
 
-class MemberPostSerializer(serializers.ModelSerializer):
-    # image_url = serializers.SerializerMethodField()
+class MemberWithoutIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['name', 'image']
+
+class MemberWithIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['id', 'name', 'image']
-
-    # def get_image_url(self, obj):
-    #     if obj.image:
-    #         return self.context['request'].build.absolute_uri(obj.image.url)
-    #     return None
