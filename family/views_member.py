@@ -29,18 +29,19 @@ def create_member(request, pk):
         
 
 # 멤버 수정 (완)
-@api_view(['PUT'])
-def update_member(request, pk, member_id):
-    request_object = json.load(request)
+# @api_view(['PUT'])
+# def update_member(request, pk, member_id):
+#     request_object = json.load(request)
     
-    try:
-        member = Member.objects.get(group__pk = pk, member_id = member_id)
-        member.name = request_object['name']
-        member.image = request_object['image']
-        member.save()
-        return Response(status=status.HTTP_200_OK)
-    except:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+#     try:
+#         member = Member.objects.get(group__pk = pk, member_id = member_id)
+#         member.name = request_object['name']
+#         member.image = request_object['image']
+#         member.save()
+#         return Response(status=status.HTTP_200_OK)
+#     except:
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
+
     
 
 # 멤버 삭제 (완)
@@ -54,7 +55,7 @@ def delete_member(request, pk, member_id):
 @api_view(['GET'])
 def all_member(request):
     members = Member.objects.all()
-    serializer = MemberSerializer(members, context={'request': request}, many = True)
+    serializer = MemberSerializer(members, many = True, context = {'request':request})
     return Response(serializer.data)
 
 # 유저 정보 불러오기 (완)
@@ -72,6 +73,8 @@ def get_member(request, group_pk, member_pk):
 @api_view(['GET'])
 def get_members(request, group_pk):
     group = Group.objects.get(pk = group_pk)
+    members = Member.objects.filter(group__pk = group_pk)
+    members_serializer = MemberWithIDSerializer(members, many = True, context = {'request':request})
     color_serializer = GroupColorSerializer(group)
     
     members = Member.objects.filter(group__pk = group_pk)
@@ -80,6 +83,5 @@ def get_members(request, group_pk):
 
     data = {}
     data['color'] = color_serializer.data['color']
-    data['family'] = members_serializer.data
+    data['family'] = family
     return Response(data)
-

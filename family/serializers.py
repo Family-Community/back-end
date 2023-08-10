@@ -25,6 +25,12 @@ class MemberSerializer(serializers.ModelSerializer):
         model = Member
 
         fields = '__all__'
+    
+    def get_image(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.image.url)
+        return None
 
     def get_image(self, obj):
         if obj.image:
@@ -36,6 +42,11 @@ class MemberSerializer(serializers.ModelSerializer):
     #     group = self.context.get('group')
     #     member_id = self.context.get('member_id')
     #     return Member.objects.create(group = group, member_id = member_id, **data)
+
+class MemberCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['id', 'name', 'image']
 
 class MemberWithoutIDSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
@@ -54,7 +65,7 @@ class MemberWithIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['id', 'name', 'image']
-
+    
     def get_image(self, obj):
         if obj.image:
             request = self.context.get('request')

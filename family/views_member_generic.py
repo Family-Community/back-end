@@ -8,12 +8,12 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from rest_framework.decorators import api_view
 import json
-from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.generics import CreateAPIView, DestroyAPIView, UpdateAPIView
 
 # Create your views here.
 # 멤버 생성
 class CreateMember(CreateAPIView):
-    serializer_class = MemberWithoutIDSerializer
+    serializer_class = MemberCreateSerializer
 
     def perform_create(self, serializer):
         group_pk = self.kwargs['group_pk']
@@ -21,7 +21,12 @@ class CreateMember(CreateAPIView):
         serializer.save(group = group)
         return Response(status=status.HTTP_201_CREATED)
 
-
-class UpdateDestroyMember(RetrieveUpdateDestroyAPIView):
+# 멤버 수정 삭제
+class DeleteMember(DestroyAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberWithIDSerializer
+
+# 멤버 수정
+class RetrieveMember(UpdateAPIView):
+    queryset = Member.objects.all()
+    serializer_class = MemberCreateSerializer
