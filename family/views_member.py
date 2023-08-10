@@ -53,7 +53,7 @@ def delete_member(request, pk, member_id):
 @api_view(['GET'])
 def all_member(request):
     members = Member.objects.all()
-    serializer = MemberSerializer(members, many = True)
+    serializer = MemberSerializer(members, context={'request': request}, many = True)
     return Response(serializer.data)
 
 # 유저 정보 불러오기 (완)
@@ -61,7 +61,7 @@ def all_member(request):
 def get_member(request, group_pk, member_pk):
     user = Member.objects.get(pk = member_pk)
     group = Group.objects.get(pk = group_pk)
-    member_serializer = MemberCheckSerializer(user)
+    member_serializer = MemberPostSerializer(user)
     color_serializer = GroupColorSerializer(group)
     res = member_serializer.data|color_serializer.data
     return Response(res)

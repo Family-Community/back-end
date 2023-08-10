@@ -139,8 +139,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #서버의 파일 시스템에서 미디어 파일이 저장될 실제 경로,프로젝트 폴더 내의 media폴더에 저장
 MEDIA_URL = '/media/' #웹에서 미디어 파일에 접근하기 위한 url경로, 웹에서 보이는 url
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') #서버의 파일 시스템에서 미디어 파일이 저장될 실제 경로,프로젝트 폴더 내의 media폴더에 저장
 
 pymysql.install_as_MySQLdb()
 

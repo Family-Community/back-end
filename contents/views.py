@@ -8,7 +8,7 @@ from family.serializers import *
 from rest_framework.decorators import api_view
 from django.db.models import Q
 
-def createReaction
+
 
 
 # 게시글 생성
