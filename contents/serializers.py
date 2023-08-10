@@ -22,7 +22,7 @@ class ContentSerializer(serializers.ModelSerializer):
 
 
 class ContentUserSerializer(serializers.ModelSerializer):
-    member = MemberPostSerializer()
+    member = MemberWithIDSerializer()
     reaction = ReactionUserSerializer()
     class Meta:
         model = Content
