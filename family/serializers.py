@@ -1,5 +1,8 @@
 from rest_framework import serializers
 from .models import Group, Member
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+from PIL import Image
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,9 +41,22 @@ class MemberSerializer(serializers.ModelSerializer):
     #     return Member.objects.create(group = group, member_id = member_id, **data)
 
 class MemberCreateSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField()
     class Meta:
         model = Member
         fields = ['id', 'name', 'image']
+
+    def validate_image(self, value):
+        
+        img = Image.open(value)
+        max_size = (50, 50)  # 가로, 세로
+        img.thumbnail(max_size, Image.LANCZOS)
+
+        buffer = BytesIO()
+        img.save(buffer, format='JPEG')
+        value.file = buffer
+
+        return value
 
 class MemberWithoutIDSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
