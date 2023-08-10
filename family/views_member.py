@@ -76,10 +76,7 @@ def get_members(request, group_pk):
     members = Member.objects.filter(group__pk = group_pk)
     members_serializer = MemberWithIDSerializer(members, many = True, context = {'request':request})
     color_serializer = GroupColorSerializer(group)
-    
-    members = Member.objects.filter(group__pk = group_pk)
-    members_serializer = MemberWithIDSerializer(members, many = True, context = {'request':request})
-    color_serializer = GroupColorSerializer(group)
+    family = members_serializer.data
 
     data = {}
     data['color'] = color_serializer.data['color']

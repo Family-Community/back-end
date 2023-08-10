@@ -42,7 +42,7 @@ class AllContent(ListAPIView):
 def get_contents(request, group_pk):
     group = Group.objects.get(pk = group_pk)
     contents = Content.objects.filter(member__group__pk = group_pk)
-    contents_serializer = ContentUserSerializer(contents, many = True)
+    contents_serializer = ContentUserSerializer(contents, many = True, context = {'request':request})
     color_serializer = GroupColorSerializer(group)
 
     data = {}
@@ -66,38 +66,89 @@ def search_contents(request, group_pk, search):
     return Response(data)
     
 
+# Reaction API
 @api_view(['POST'])
-def user_reaction(request, group_pk, member_pk, post_id, reaction_number):
-    reaction = Reaction.objects.get(content__pk = post_id)
-    
+def react(request, group_pk, member_pk, post_id, reaction_number):
+    content = Content.objects.get(pk = post_id)
+    member = Member.objects.get(pk = member_pk)
+
     if reaction_number == 1:
-        if reaction.user_smile.filter(pk = member_pk).exists():
-            reaction.user_smile.remove(Member.objects.get(pk = member_pk))
+        if content.user_smile.filter(pk = member_pk).exists():
+            content.user_smile.remove(member)
+            return Response(status=status.HTTP_200_OK)
         else:
-            reaction.user_smile.add(Member.objects.get(pk = member_pk))
+            content.user_smile.add(member)
+            return Response(status=status.HTTP_200_OK)
     elif reaction_number == 2:
-        if reaction.user_good.filter(pk = member_pk).exists():
-            reaction.user_good.remove(Member.objects.get(pk = member_pk))
+        if content.user_good.filter(pk = member_pk).exists():
+            content.user_good.remove(member)
+            return Response(status=status.HTTP_200_OK)
         else:
-            reaction.user_good.add(Member.objects.get(pk = member_pk))
+            content.user_good.add(member)
+            return Response(status=status.HTTP_200_OK)
     elif reaction_number == 3:
-        if reaction.user_sad.filter(pk = member_pk).exists():
-            reaction.user_sad.remove(Member.objects.get(pk = member_pk))
+        if content.user_sad.filter(pk = member_pk).exists():
+            content.user_sad.remove(member)
+            return Response(status=status.HTTP_200_OK)
         else:
-            reaction.user_sad.add(Member.objects.get(pk = member_pk))
+            content.user_sad.add(member)
+            return Response(status=status.HTTP_200_OK)
     elif reaction_number == 4:
-        if reaction.user_heart.filter(pk = member_pk).exists():
-            reaction.user_heart.remove(Member.objects.get(pk = member_pk))
+        if content.user_heart.filter(pk = member_pk).exists():
+            content.user_heart.remove(member)
+            return Response(status=status.HTTP_200_OK)
         else:
-            reaction.user_heart.add(Member.objects.get(pk = member_pk))
+            content.user_heart.add(member)
+            return Response(status=status.HTTP_200_OK)
     elif reaction_number == 5:
-        if reaction.user_worry.filter(pk = member_pk).exists():
-            reaction.user_worry.remove(Member.objects.get(pk = member_pk))
+        if content.user_worry.filter(pk = member_pk).exists():
+            content.user_worry.remove(member)
+            return Response(status=status.HTTP_200_OK)
         else:
-            reaction.user_worry.add(Member.objects.get(pk = member_pk))
+            content.user_worry.add(member)
+            return Response(status=status.HTTP_200_OK)
     elif reaction_number == 6:
-        if reaction.user_check.filter(pk = member_pk).exists():
-            reaction.user_check.remove(Member.objects.get(pk = member_pk))
+        if content.user_check.filter(pk = member_pk).exists():
+            content.user_check.remove(member)
+            return Response(status=status.HTTP_200_OK)
         else:
-            reaction.user_check.add(Member.objects.get(pk = member_pk))
+            content.user_check.add(member)
+            return Response(status=status.HTTP_200_OK)
+
+
+
+# @api_view(['POST'])
+# def user_reaction(request, group_pk, member_pk, post_id, reaction_number):
+#     reaction = Reaction.objects.get(content__pk = post_id)
+    
+#     if reaction_number == 1:
+#         if reaction.user_smile.filter(pk = member_pk).exists():
+#             reaction.user_smile.remove(Member.objects.get(pk = member_pk))
+#         else:
+#             reaction.user_smile.add(Member.objects.get(pk = member_pk))
+#     elif reaction_number == 2:
+#         if reaction.user_good.filter(pk = member_pk).exists():
+#             reaction.user_good.remove(Member.objects.get(pk = member_pk))
+#         else:
+#             reaction.user_good.add(Member.objects.get(pk = member_pk))
+#     elif reaction_number == 3:
+#         if reaction.user_sad.filter(pk = member_pk).exists():
+#             reaction.user_sad.remove(Member.objects.get(pk = member_pk))
+#         else:
+#             reaction.user_sad.add(Member.objects.get(pk = member_pk))
+#     elif reaction_number == 4:
+#         if reaction.user_heart.filter(pk = member_pk).exists():
+#             reaction.user_heart.remove(Member.objects.get(pk = member_pk))
+#         else:
+#             reaction.user_heart.add(Member.objects.get(pk = member_pk))
+#     elif reaction_number == 5:
+#         if reaction.user_worry.filter(pk = member_pk).exists():
+#             reaction.user_worry.remove(Member.objects.get(pk = member_pk))
+#         else:
+#             reaction.user_worry.add(Member.objects.get(pk = member_pk))
+#     elif reaction_number == 6:
+#         if reaction.user_check.filter(pk = member_pk).exists():
+#             reaction.user_check.remove(Member.objects.get(pk = member_pk))
+#         else:
+#             reaction.user_check.add(Member.objects.get(pk = member_pk))
     
