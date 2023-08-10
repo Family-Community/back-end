@@ -15,3 +15,13 @@ class Content(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Reaction(models.Model):
+    content = models.ForeignKey(Content, on_delete=models.CASCADE)
+    user_smile = models.ManyToManyField(Member, related_name='smile_content',)
+    user_good = models.ManyToManyField(Member, related_name='good_content')
+    user_sad = models.ManyToManyField(Member, related_name='sad_content')
+    user_heart = models.ManyToManyField(Member, related_name='heart_content')
+    user_worry = models.ManyToManyField(Member, related_name='worry_content')
+    user_check = models.ManyToManyField(Member, related_name='check_content')

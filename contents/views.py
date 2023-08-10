@@ -8,6 +8,9 @@ from family.serializers import *
 from rest_framework.decorators import api_view
 from django.db.models import Q
 
+def createReaction
+
+
 # 게시글 생성
 class CreateContent(CreateAPIView):
     serializer_class = CreateContentSerializer
@@ -17,7 +20,9 @@ class CreateContent(CreateAPIView):
         member_pk = self.kwargs['member_pk']
         member = Member.objects.get(pk = member_pk)
         serializer.save(member = member)
+
         return Response(status=status.HTTP_201_CREATED)
+
 
 # 게시글 수정, 삭제
 class UpdateDestroyContent(RetrieveUpdateDestroyAPIView):
@@ -59,4 +64,40 @@ def search_contents(request, group_pk, search):
     data['color'] = color_serializer.data['color']
     data['post'] = contents_serializer.data
     return Response(data)
+    
+
+@api_view(['POST'])
+def user_reaction(request, group_pk, member_pk, post_id, reaction_number):
+    reaction = Reaction.objects.get(content__pk = post_id)
+    
+    if reaction_number == 1:
+        if reaction.user_smile.filter(pk = member_pk).exists():
+            reaction.user_smile.remove(Member.objects.get(pk = member_pk))
+        else:
+            reaction.user_smile.add(Member.objects.get(pk = member_pk))
+    elif reaction_number == 2:
+        if reaction.user_good.filter(pk = member_pk).exists():
+            reaction.user_good.remove(Member.objects.get(pk = member_pk))
+        else:
+            reaction.user_good.add(Member.objects.get(pk = member_pk))
+    elif reaction_number == 3:
+        if reaction.user_sad.filter(pk = member_pk).exists():
+            reaction.user_sad.remove(Member.objects.get(pk = member_pk))
+        else:
+            reaction.user_sad.add(Member.objects.get(pk = member_pk))
+    elif reaction_number == 4:
+        if reaction.user_heart.filter(pk = member_pk).exists():
+            reaction.user_heart.remove(Member.objects.get(pk = member_pk))
+        else:
+            reaction.user_heart.add(Member.objects.get(pk = member_pk))
+    elif reaction_number == 5:
+        if reaction.user_worry.filter(pk = member_pk).exists():
+            reaction.user_worry.remove(Member.objects.get(pk = member_pk))
+        else:
+            reaction.user_worry.add(Member.objects.get(pk = member_pk))
+    elif reaction_number == 6:
+        if reaction.user_check.filter(pk = member_pk).exists():
+            reaction.user_check.remove(Member.objects.get(pk = member_pk))
+        else:
+            reaction.user_check.add(Member.objects.get(pk = member_pk))
     
