@@ -28,13 +28,13 @@ class CreateContent(CreateAPIView):
 class UpdateContent(UpdateAPIView):
     queryset = Content.objects.all()
     serializer_class = CreateContentSerializer
-    lookup_url_kwarg = 'post_id'
+    lookup_url_kwarg = 'post_pk'
 
 
 # 게시글 삭제
 class DeleteContent(DestroyAPIView):
     queryset = Content.objects.all()
-    lookup_url_kwarg = 'post_id'
+    lookup_url_kwarg = 'post_pk'
 
 
 # 현재 모든 게시글 확인
@@ -74,8 +74,8 @@ def search_contents(request, group_pk, search):
 
 # Reaction API
 @api_view(['POST'])
-def react(request, group_pk, member_pk, post_id, reaction_number):
-    content = Content.objects.get(pk = post_id)
+def react(request, group_pk, member_pk, post_pk, reaction_number):
+    content = Content.objects.get(pk = post_pk)
     member = Member.objects.get(pk = member_pk)
 
     if reaction_number == 1:
@@ -148,8 +148,8 @@ def react(request, group_pk, member_pk, post_id, reaction_number):
 
 
 # @api_view(['POST'])
-# def user_reaction(request, group_pk, member_pk, post_id, reaction_number):
-#     reaction = Reaction.objects.get(content__pk = post_id)
+# def user_reaction(request, group_pk, member_pk, post_pk, reaction_number):
+#     reaction = Reaction.objects.get(content__pk = post_pk)
     
 #     if reaction_number == 1:
 #         if reaction.user_smile.filter(pk = member_pk).exists():
