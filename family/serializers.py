@@ -32,12 +32,6 @@ class MemberSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.image.url)
         return None
 
-    def get_image(self, obj):
-        if obj.image:
-            request = self.context.get('request')
-            return request.build_absolute_uri(obj.image.url)
-        return None
-
     # def create(self, data):
     #     group = self.context.get('group')
     #     member_id = self.context.get('member_id')
