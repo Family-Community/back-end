@@ -30,7 +30,12 @@ class MemberSerializer(serializers.ModelSerializer):
     #     member_id = self.context.get('member_id')
     #     return Member.objects.create(group = group, member_id = member_id, **data)
 
-class MemberPostSerializer(serializers.ModelSerializer):
+class MemberWithoutIDSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['name', 'image']
+
+class MemberWithIDSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['id', 'name', 'image']
