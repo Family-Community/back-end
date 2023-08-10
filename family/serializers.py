@@ -37,6 +37,11 @@ class MemberSerializer(serializers.ModelSerializer):
     #     member_id = self.context.get('member_id')
     #     return Member.objects.create(group = group, member_id = member_id, **data)
 
+class MemberCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['name', 'image']
+
 class MemberWithoutIDSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
     class Meta:
