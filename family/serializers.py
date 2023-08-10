@@ -40,7 +40,7 @@ class MemberSerializer(serializers.ModelSerializer):
 class MemberCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ['name', 'image']
+        fields = ['id', 'name', 'image']
 
 class MemberWithoutIDSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
