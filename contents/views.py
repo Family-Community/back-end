@@ -74,11 +74,11 @@ def search_contents(request, group_pk, search):
 
 # Reaction API
 @api_view(['POST'])
-def react(request, group_pk, member_pk, post_pk, reaction_number):
+def react(request, group_pk, member_pk, post_pk, reaction_num):
     content = Content.objects.get(pk = post_pk)
     member = Member.objects.get(pk = member_pk)
 
-    if reaction_number == 1:
+    if reaction_num == 1:
         if content.user_smile.filter(pk = member_pk).exists():
             content.user_smile.remove(member)
             content.smile_cnt -= 1
@@ -89,7 +89,7 @@ def react(request, group_pk, member_pk, post_pk, reaction_number):
             content.smile_cnt += 1
             content.save()
             return Response(status=status.HTTP_200_OK)
-    elif reaction_number == 2:
+    elif reaction_num == 2:
         if content.user_good.filter(pk = member_pk).exists():
             content.user_good.remove(member)
             content.good_cnt -= 1
@@ -100,7 +100,7 @@ def react(request, group_pk, member_pk, post_pk, reaction_number):
             content.good_cnt += 1
             content.save()
             return Response(status=status.HTTP_200_OK)
-    elif reaction_number == 3:
+    elif reaction_num == 3:
         if content.user_sad.filter(pk = member_pk).exists():
             content.user_sad.remove(member)
             content.sad_cnt -= 1
@@ -111,7 +111,7 @@ def react(request, group_pk, member_pk, post_pk, reaction_number):
             content.sad_cnt += 1
             content.save()
             return Response(status=status.HTTP_200_OK)
-    elif reaction_number == 4:
+    elif reaction_num == 4:
         if content.user_heart.filter(pk = member_pk).exists():
             content.user_heart.remove(member)
             content.heart_cnt -= 1
@@ -122,7 +122,7 @@ def react(request, group_pk, member_pk, post_pk, reaction_number):
             content.heart_cnt += 1
             content.save()
             return Response(status=status.HTTP_200_OK)
-    elif reaction_number == 5:
+    elif reaction_num == 5:
         if content.user_worry.filter(pk = member_pk).exists():
             content.user_worry.remove(member)
             content.worry_cnt -= 1
@@ -133,7 +133,7 @@ def react(request, group_pk, member_pk, post_pk, reaction_number):
             content.worry_cnt += 1
             content.save()
             return Response(status=status.HTTP_200_OK)
-    elif reaction_number == 6:
+    elif reaction_num == 6:
         if content.user_check.filter(pk = member_pk).exists():
             content.user_check.remove(member)
             content.check_cnt -= 1
@@ -148,35 +148,35 @@ def react(request, group_pk, member_pk, post_pk, reaction_number):
 
 
 # @api_view(['POST'])
-# def user_reaction(request, group_pk, member_pk, post_pk, reaction_number):
+# def user_reaction(request, group_pk, member_pk, post_pk, reaction_num):
 #     reaction = Reaction.objects.get(content__pk = post_pk)
     
-#     if reaction_number == 1:
+#     if reaction_num == 1:
 #         if reaction.user_smile.filter(pk = member_pk).exists():
 #             reaction.user_smile.remove(Member.objects.get(pk = member_pk))
 #         else:
 #             reaction.user_smile.add(Member.objects.get(pk = member_pk))
-#     elif reaction_number == 2:
+#     elif reaction_num == 2:
 #         if reaction.user_good.filter(pk = member_pk).exists():
 #             reaction.user_good.remove(Member.objects.get(pk = member_pk))
 #         else:
 #             reaction.user_good.add(Member.objects.get(pk = member_pk))
-#     elif reaction_number == 3:
+#     elif reaction_num == 3:
 #         if reaction.user_sad.filter(pk = member_pk).exists():
 #             reaction.user_sad.remove(Member.objects.get(pk = member_pk))
 #         else:
 #             reaction.user_sad.add(Member.objects.get(pk = member_pk))
-#     elif reaction_number == 4:
+#     elif reaction_num == 4:
 #         if reaction.user_heart.filter(pk = member_pk).exists():
 #             reaction.user_heart.remove(Member.objects.get(pk = member_pk))
 #         else:
 #             reaction.user_heart.add(Member.objects.get(pk = member_pk))
-#     elif reaction_number == 5:
+#     elif reaction_num == 5:
 #         if reaction.user_worry.filter(pk = member_pk).exists():
 #             reaction.user_worry.remove(Member.objects.get(pk = member_pk))
 #         else:
 #             reaction.user_worry.add(Member.objects.get(pk = member_pk))
-#     elif reaction_number == 6:
+#     elif reaction_num == 6:
 #         if reaction.user_check.filter(pk = member_pk).exists():
 #             reaction.user_check.remove(Member.objects.get(pk = member_pk))
 #         else:
