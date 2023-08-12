@@ -80,23 +80,23 @@ WSGI_APPLICATION = 'anbang.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'Family',
-        'USER': 'root',
-        'PASSWORD': 'family',
-        'HOST': 'svc.sel4.cloudtype.app',
-        'PORT': '32160'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql', 
+#         'NAME': 'Family',
+#         'USER': 'root',
+#         'PASSWORD': 'family',
+#         'HOST': 'svc.sel4.cloudtype.app',
+#         'PORT': '32160'
+#     }
+# }
 
 
 # Password validation

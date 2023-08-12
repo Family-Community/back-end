@@ -46,17 +46,25 @@ class MemberCreateSerializer(serializers.ModelSerializer):
         model = Member
         fields = ['id', 'name', 'image']
 
-    def validate_image(self, value):
-        
-        img = Image.open(value)
-        max_size = (50, 50)  # 가로, 세로
-        img.thumbnail(max_size, Image.LANCZOS)
+    # def validate_image(self, value):
+    #     img = Image.open(value)
+    #     width, height = img.size
 
-        buffer = BytesIO()
-        img.save(buffer, format='JPEG')
-        value.file = buffer
+    #     min_side = min(width, height)
+    #     left = (width - min_side) // 2
+    #     top = (height - min_side) // 2
+    #     right = (width + min_side) // 2
+    #     bottom = (height + min_side) // 2
+    #     img = img.crop((left, top, right, bottom))
 
-        return value
+    #     target_size = (300, 300)  # 원하는 크기로 변경
+    #     img.thumbnail(target_size, Image.LANCZOS)
+
+    #     buffer = BytesIO()
+    #     img.save(buffer, format='JPEG')
+    #     value.file = buffer
+
+    #     return value
 
 class MemberWithoutIDSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
