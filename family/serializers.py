@@ -87,3 +87,16 @@ class MemberWithIDSerializer(serializers.ModelSerializer):
             request = self.context.get('request')
             return request.build_absolute_uri(obj.image_thumbnail.url)
         return None
+
+class MemberImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Member
+        fields = ['image']
+
+    def get_image(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.image.url)
+        return None

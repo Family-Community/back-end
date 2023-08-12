@@ -82,3 +82,10 @@ def get_members(request, group_pk):
     data['color'] = color_serializer.data['color']
     data['family'] = family
     return Response(data)
+
+
+@api_view(['GET'])
+def member_image(request, member_pk):
+    member = Member.objects.get(pk = member_pk)
+    serializer = MemberImageSerializer(member, context = {'request':request})
+    return Response(serializer.data)
