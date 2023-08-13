@@ -2,7 +2,7 @@ from django.db import models
 import uuid, hashlib
 from PIL import Image
 from io import BytesIO
-from django.core.files.uploadedfile import InMemoryUploadedFile, SimpleUploadedFile
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 def generate_hash():
     id = str(uuid.uuid4())

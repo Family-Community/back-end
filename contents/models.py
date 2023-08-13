@@ -1,5 +1,5 @@
 from django.db import models
-from family.models import Member,Group
+from family.models import Member
 
 #사진 저장 경로 설정
 def user_photo_path(instance, filename):

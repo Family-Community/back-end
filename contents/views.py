@@ -9,8 +9,6 @@ from rest_framework.decorators import api_view
 from django.db.models import Q
 
 
-
-
 # 게시글 생성
 class CreateContent(CreateAPIView):
     serializer_class = CreateContentSerializer
