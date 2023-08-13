@@ -21,7 +21,7 @@ class CreateMember(CreateAPIView):
         serializer.save(group = group)
         return Response(status=status.HTTP_201_CREATED)
 
-# 멤버 수정 삭제
+# 멤버 삭제
 class DeleteMember(DestroyAPIView):
     queryset = Member.objects.all()
     serializer_class = MemberWithIDSerializer
