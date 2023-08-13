@@ -21,16 +21,23 @@ class GroupPkSerializer(serializers.ModelSerializer):
 
 
 class MemberSerializer(serializers.ModelSerializer):
-    image_thumbnail = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
+    image_original = serializers.SerializerMethodField()
     class Meta:
         model = Member
 
         fields = '__all__'
     
-    def get_image_thumbnail(self, obj):
-        if obj.image_thumbnail:
+    def get_image(self, obj):
+        if obj.image:
             request = self.context.get('request')
-            return request.build_absolute_uri(obj.image_thumbnail.url)
+            return request.build_absolute_uri(obj.image.url)
+        return None
+    
+    def get_image_original(self, obj):
+        if obj.image_original:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.image_original.url)
         return None
 
     # def create(self, data):
@@ -39,10 +46,10 @@ class MemberSerializer(serializers.ModelSerializer):
     #     return Member.objects.create(group = group, member_id = member_id, **data)
 
 class MemberCreateSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField()
+    image_original = serializers.ImageField()
     class Meta:
         model = Member
-        fields = ['id', 'name', 'image']
+        fields = ['id', 'name', 'image_original']
 
     # def validate_image(self, value):
     #     img = Image.open(value)
@@ -65,38 +72,38 @@ class MemberCreateSerializer(serializers.ModelSerializer):
     #     return value
 
 class MemberWithoutIDSerializer(serializers.ModelSerializer):
-    image_thumbnail = serializers.SerializerMethodField()
-    class Meta:
-        model = Member
-        fields = ['name', 'image_thumbnail']
-    
-    def get_image_thumbnail(self, obj):
-        if obj.image_thumbnail:
-            request = self.context.get('request')
-            return request.build_absolute_uri(obj.image_thumbnail.url)
-        return None
-
-class MemberWithIDSerializer(serializers.ModelSerializer):
-    image_thumbnail = serializers.SerializerMethodField()
-    class Meta:
-        model = Member
-        fields = ['id', 'name', 'image_thumbnail']
-    
-    def get_image_thumbnail(self, obj):
-        if obj.image_thumbnail:
-            request = self.context.get('request')
-            return request.build_absolute_uri(obj.image_thumbnail.url)
-        return None
-
-class MemberImageSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField()
-
     class Meta:
         model = Member
-        fields = ['image']
-
+        fields = ['name', 'image']
+    
     def get_image(self, obj):
         if obj.image:
             request = self.context.get('request')
             return request.build_absolute_uri(obj.image.url)
+        return None
+
+class MemberWithIDSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+    class Meta:
+        model = Member
+        fields = ['id', 'name', 'image']
+    
+    def get_image(self, obj):
+        if obj.image:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.image.url)
+        return None
+
+class MemberImageSerializer(serializers.ModelSerializer):
+    image_original = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Member
+        fields = ['image_original']
+
+    def get_imag_original(self, obj):
+        if obj.image_original:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.image_original.url)
         return None
