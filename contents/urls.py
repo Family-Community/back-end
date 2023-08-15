@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:group_pk>/', views.get_contents), # 그룹 내 게시글 확인
     path('<int:group_pk>/<str:search>/', views.search_contents), # 게시물 검색
     path('<int:group_pk>/<int:member_pk>/<int:post_pk>/reaction/<int:reaction_num>/', views.react), # 게시글 반응 작성
+    path('getpost/<int:post_id>/', views.get_post), # 게시글 반환
 ]
 
 

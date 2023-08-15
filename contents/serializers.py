@@ -58,3 +58,17 @@ class CreateContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Content
         fields = ['title', 'content', 'photo']
+
+
+class GetContentSerializer(serializers.ModelSerializer):
+    photo = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Content
+        fields = ['title', 'content', 'photo']
+
+    def get_photo(self, obj):
+        if obj.photo:
+            request = self.context.get('request')
+            return request.build_absolute_uri(obj.photo.url)
+        return None

@@ -182,3 +182,10 @@ def react(request, group_pk, member_pk, post_pk, reaction_num):
 #         else:
 #             reaction.user_check.add(Member.objects.get(pk = member_pk))
     
+
+# 게시글 정보 반환
+@api_view(['GET'])
+def get_post(request, post_id):
+    post = Content.objects.get(pk = post_id)
+    serializer = GetContentSerializer(post, context = {'request':request})
+    return Response(serializer.data, status=status.HTTP_200_OK)
