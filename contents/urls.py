@@ -15,5 +15,3 @@ urlpatterns = [
     path('getpost/<int:post_id>/', views.get_post), # 게시글 반환
     path('getuserpost/<int:member_pk>/', views.get_user_post), # 한 유저의 게시글 반환
 ]
-
-
