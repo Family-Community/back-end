@@ -82,3 +82,8 @@ def get_members(request, group_pk):
     data['color'] = color_serializer.data['color']
     data['family'] = family
     return Response(data)
+
+
+def get_profile_image(request, member_pk):
+    member = Member.objects.get(pk = member_pk)
+    serializer = 
