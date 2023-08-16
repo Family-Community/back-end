@@ -211,3 +211,18 @@ def get_post(request, post_id):
     post = Content.objects.get(pk = post_id)
     serializer = GetContentSerializer(post, context = {'request':request})
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+# 한 유저의 포스팅 반환
+@api_view(['GET'])
+def get_user_post(request, member_pk):
+    member = Member.objects.get(pk = member_pk)
+    group = member.group
+    contents = Content.objects.filter(member__pk = member_pk)
+    color_serializer = GroupColorSerializer(group)
+    contents_serializer = ContentUserSerializer(contents, many = True, context = {'request':request})
+    
+    data = {}
+    data['color'] = color_serializer.data['color']
+    data['post'] = contents_serializer.data
+    return Response(data)

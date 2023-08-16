@@ -13,6 +13,7 @@ urlpatterns = [
     path('<int:group_pk>/<str:search>/', views.search_contents), # 게시물 검색
     path('<int:group_pk>/<int:member_pk>/<int:post_pk>/reaction/<int:reaction_num>/', views.react), # 게시글 반응 작성
     path('getpost/<int:post_id>/', views.get_post), # 게시글 반환
+    path('getuserpost/<int:member_pk>/', views.get_user_post), # 한 유저의 게시글 반환
 ]
 
 
