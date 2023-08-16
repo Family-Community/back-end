@@ -84,6 +84,9 @@ def get_members(request, group_pk):
     return Response(data)
 
 
-def get_profile_image(request, member_pk):
+# 멤버의 원본 이미지
+@api_view(['GET'])
+def member_image(request, member_pk):
     member = Member.objects.get(pk = member_pk)
-    serializer = 
+    serializer = MemberImageSerializer(member, context = {'request':request})
+    return Response(serializer.data)

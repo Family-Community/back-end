@@ -18,6 +18,6 @@ urlpatterns = [
     path('profile/<int:pk>/delete/', views_member_generic.DeleteMember.as_view()), # 프로필 삭제
     path('allgroup/', views_group.all_group), # 모든 그룹 목록
     path('allmember/', views_member.all_member), # 모든 멤버 목록
-    path('<int:member_pk>/image/', )
+    path('<int:member_pk>/image/', views_member.member_image), # 원본 프로필 사진
 
 ]
