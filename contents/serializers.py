@@ -1,6 +1,10 @@
 from rest_framework import serializers
 from .models import *
 from family.serializers import *
+import requests
+from io import BytesIO
+from django.core.files.base import ContentFile
+import time
 
 # class ReactionSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -58,6 +62,20 @@ class CreateContentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Content
         fields = ['title', 'content', 'photo']
+
+
+class UpdateContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Content
+        fields = ['title', 'content']
+
+
+class UpdateWithPhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Content
+        fields = ['title', 'content', 'photo']
+
+        
 
 
 class GetContentSerializer(serializers.ModelSerializer):

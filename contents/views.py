@@ -7,6 +7,9 @@ from family.models import *
 from family.serializers import *
 from rest_framework.decorators import api_view
 from django.db.models import Q
+import requests
+from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 
 
 
@@ -25,10 +28,31 @@ class CreateContent(CreateAPIView):
 
 
 # 게시글 수정
+# class UpdateContent(UpdateAPIView):
+#     queryset = Content.objects.all()
+#     serializer_class = CreateContentSerializer
+#     lookup_url_kwarg = 'post_pk'
+
 class UpdateContent(UpdateAPIView):
-    queryset = Content.objects.all()
-    serializer_class = CreateContentSerializer
-    lookup_url_kwarg = 'post_pk'
+    serializer_class = CreateContentSerializer  # Set the default serializer class
+
+    def put(self, request, group_pk, member_pk, post_pk, format=None):
+        instance = Content.objects.get(pk=post_pk)
+        
+        # Check if the 'photo' field in the request is a URL or a file
+        if 'photo' in request.data and isinstance(request.data['photo'], str):
+            self.serializer_class = UpdateContentSerializer
+        else:
+            self.serializer_class = UpdateWithPhotoSerializer
+        
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    
 
 
 # 게시글 삭제
