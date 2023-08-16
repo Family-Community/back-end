@@ -32,7 +32,7 @@ class CreateContent(CreateAPIView):
 
 # 게시글 수정
 class UpdateContent(UpdateAPIView):
-    serializer_class = CreateContentSerializer  # Set the default serializer class
+    serializer_class = CreateContentSerializer
 
     def put(self, request, group_pk, member_pk, post_pk, format=None):
         instance = Content.objects.get(pk=post_pk)
