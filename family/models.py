@@ -46,6 +46,7 @@ class Member(models.Model):
             cropped_image.thumbnail(max_size, Image.LANCZOS)
             
             image_thumb_io = BytesIO()
+            cropped_image = cropped_image.convert('RGB') # 이 부분
             cropped_image.save(image_thumb_io, format='JPEG')  
             image_thumb = SimpleUploadedFile(
                 name=f'{self.image_original.name.split(".")[0]}_thumb.jpg',  
