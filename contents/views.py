@@ -7,9 +7,6 @@ from family.models import *
 from family.serializers import *
 from rest_framework.decorators import api_view
 from django.db.models import Q
-import requests
-from django.core.files import File
-from django.core.files.temp import NamedTemporaryFile
 
 
 
@@ -27,12 +24,13 @@ class CreateContent(CreateAPIView):
         return Response(status=status.HTTP_201_CREATED)
 
 
-# 게시글 수정
+
 # class UpdateContent(UpdateAPIView):
 #     queryset = Content.objects.all()
 #     serializer_class = CreateContentSerializer
 #     lookup_url_kwarg = 'post_pk'
 
+# 게시글 수정
 class UpdateContent(UpdateAPIView):
     serializer_class = CreateContentSerializer  # Set the default serializer class
 
