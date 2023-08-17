@@ -120,3 +120,9 @@ class MemberWithoutImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
         fields = ['name']
+
+
+class UpdateWithImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['name', 'image_original']
