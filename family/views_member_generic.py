@@ -45,7 +45,7 @@ class UpdateMember(UpdateAPIView):
     def put(self, request, pk, format = None):
         instance = Member.objects.get(pk = pk)
 
-        if 'image_original' in request.data and isinstance(request.data['image'], str):
+        if 'image_original' in request.data and isinstance(request.data['image_original'], str):
             self.serializer_class = MemberWithoutImageSerializer
         else:
             self.serializer_class = MemberCreateSerializer
