@@ -15,6 +15,18 @@ from rest_framework.generics import CreateAPIView, DestroyAPIView, UpdateAPIView
 class CreateMember(CreateAPIView):
     serializer_class = MemberCreateSerializer
 
+    def form_valid(self, form):
+        if 'image_original' in self.request.FILES:
+            form.instance.image_original = self.request.FILES['image_original']
+        
+        name = self.request.POST.get('name', '')
+        form.instance.name = name
+
+        if 'image_original' not in self.request.FILES:
+            form.instance.image_original = None
+        
+        return super().form_valid(form)
+
     def perform_create(self, serializer):
         group_pk = self.kwargs['group_pk']
         group = Group.objects.get(pk = group_pk)

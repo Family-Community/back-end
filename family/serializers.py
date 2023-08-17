@@ -51,7 +51,7 @@ class MemberSerializer(serializers.ModelSerializer):
 
 # 멤버 생성 시리얼라이저
 class MemberCreateSerializer(serializers.ModelSerializer):
-    image_original = serializers.ImageField()
+    image_original = serializers.ImageField(required=False)
     class Meta:
         model = Member
         fields = ['id', 'name', 'image_original']

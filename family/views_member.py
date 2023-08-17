@@ -28,23 +28,23 @@ import json
 #         return Response(status=status.HTTP_400_BAD_REQUEST)
     
 
-@api_view(['POST'])
-def create_member(request, group_pk):
-    group = Group.objects.get(pk = group_pk)
-    try:
-        data = json.load(request)
-        name = data['name']
-        if data['image_original']:
-            image = data.FILES
-            member = Member(name = name, image = image, group = group)
-            member.save()
-            return Response(status=status.HTTP_201_CREATED)
-        else:
-            member = Member(name = name, group = group)
-            member.save()
-            return Response(status=status.HTTP_201_CREATED)
-    except:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+# @api_view(['POST'])
+# def create_member(request, group_pk):
+#     group = Group.objects.get(pk = group_pk)
+#     try:
+#         data = json.load(request)
+#         name = data['name']
+#         if data['image_original']:
+#             image = data.FILES
+#             member = Member(name = name, image = image, group = group)
+#             member.save()
+#             return Response(status=status.HTTP_201_CREATED)
+#         else:
+#             member = Member(name = name, group = group)
+#             member.save()
+#             return Response(status=status.HTTP_201_CREATED)
+#     except:
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
 
         
         
