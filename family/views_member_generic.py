@@ -40,7 +40,7 @@ class DeleteMember(DestroyAPIView):
 
 # 멤버 수정
 class UpdateMember(UpdateAPIView):
-    queryset = Member.objects.all()
+    serializer_class = MemberCreateSerializer
 
     def put(self, request, pk, format = None):
         instance = Member.objects.get(pk = pk)
