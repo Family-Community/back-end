@@ -114,3 +114,9 @@ class MemberImageSerializer(serializers.ModelSerializer):
             request = self.context.get('request')
             return request.build_absolute_uri(obj.image_original.url)
         return None
+
+
+class MemberWithoutImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member
+        fields = ['name']

@@ -41,4 +41,18 @@ class DeleteMember(DestroyAPIView):
 # 멤버 수정
 class UpdateMember(UpdateAPIView):
     queryset = Member.objects.all()
-    serializer_class = MemberCreateSerializer
+
+    def put(self, request, pk, format = None):
+        instance = Member.objects.get(pk = pk)
+
+        if 'image' in request.data and isinstance(request.data['image'], str):
+            self.serializer_class = MemberWithoutImageSerializer
+        else:
+            self.serializer_class = MemberCreateSerializer
+
+        serializer = self.serializer_class(instance, data=request.data, partial=True)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
