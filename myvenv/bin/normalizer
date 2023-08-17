@@ -1,0 +1,8 @@
+#!/Users/mundain/Library/CloudStorage/OneDrive-한국외국어대학교/활동/멋사/중앙해커톤/Family_community/myvenv/bin/python3
+# -*- coding: utf-8 -*-
+import re
+import sys
+from charset_normalizer.cli.normalizer import cli_detect
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(cli_detect())
