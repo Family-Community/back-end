@@ -12,20 +12,41 @@ import json
 
 # Create your views here.
 # 멤버 생성(완)
-@api_view(['POST'])
-def create_member(request, pk):
-    try:
-        data_object = json.load(request)
-        name = data_object['name']
-        image = data_object['image']
-        member_id = Member.objects.filter(group__pk = pk).count() + 1
-        group = Group.objects.get(pk = pk)
-        member = Member(name = name, image = image, member_id = member_id, group = group)
-        member.save()
+# @api_view(['POST'])
+# def create_member(request, pk):
+#     try:
+#         data_object = json.load(request)
+#         name = data_object['name']
+#         image = data_object['image']
+#         member_id = Member.objects.filter(group__pk = pk).count() + 1
+#         group = Group.objects.get(pk = pk)
+#         member = Member(name = name, image = image, member_id = member_id, group = group)
+#         member.save()
 
-        return Response(status=status.HTTP_201_CREATED)
+#         return Response(status=status.HTTP_201_CREATED)
+#     except:
+#         return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['POST'])
+def create_member(request, group_pk):
+    group = Group.objects.get(pk = group_pk)
+    try:
+        data = json.load(request)
+        name = data['name']
+        if data['image_original']:
+            image = data.FILES
+            member = Member(name = name, image = image, group = group)
+            member.save()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            member = Member(name = name, group = group)
+            member.save()
+            return Response(status=status.HTTP_201_CREATED)
     except:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        
         
 
 # 멤버 수정 (완)
