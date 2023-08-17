@@ -54,5 +54,5 @@ class Member(models.Model):
                 content_type='image/jpeg' 
             )
             self.image.save(image_thumb.name, image_thumb, save=False)
-    
         super().save(*args, **kwargs)
+        
